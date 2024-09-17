@@ -1,124 +1,486 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
+
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sheryl's Personal Webpage</title>
+    <meta name="color-scheme" content="light">
+    <meta name="supported-color-schemes" content="light">
+
+    <title>Web Agency</title>
+
+    <link rel="stylesheet" href="https://api.fontshare.com/css?f[]=satoshi@1,300,301,700&f[]=clash-grotesk@1,200,201,600&f[]=quicksand@1,500,600,700&display=swap">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Satoshi', sans-serif;
+      }
+
+      body {
+        font-family: 'Satoshi', sans-serif;
+        user-select: none;
+        overflow-x: hidden;
+        background-color: #fbfbf0;
+        color: #2f2f2f;
+        transition: background-color 0.5s, color 0.5s;
+        width:100%;
+      }
+      main {
+        padding:0 2rem;
+      }
+      .dark-mode {
+        background-color: #2f2f2f;
+        color: #f6f6dc;
+      }
+
+      .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        z-index:12;
+        position: -webkit-sticky;
+        position: sticky;
+        top:1rem;
+      }
+
+      .top-bar a {
+        font-weight: bold;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: inherit;
+        margin-right: 1rem;
+      }
+
+      .top-bar button {
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        border: none;
+        background-color: #2f2f2f;
+        color: #f6f6dc;
+        border-radius: 4px;
+      }
+
+      .header {
+        text-align: center;
+        margin: 0 auto;
+        max-width: 1200px;
+      }
+
+      .header h1 {
+        font-family: 'Clash Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 60px;
+        margin-bottom: 0.5rem;
+      }
+
+      .nav-bar ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+      }
+
+      .nav-bar li {
+        margin: 0 1rem;
+      }
+
+      .nav-bar a {
+        font-weight: 300;
+        text-decoration: none;
+        color: inherit;
+        font-size: 1.25rem;
+      }
+      .title-section, .subtitle-section {
+        position: relative;
+      }
+      .main-section {
+        padding:  2rem;
+        padding-top:10rem;
+        text-align: center;
+        height:100vh;
+        min-height:100vh;
+        /*
+        */
+      }
+
+      .main-section h2 {
+        font-family: 'Clash Grotesk', sans-serif;
+        font-weight: 600;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .main-section p {
+        font-weight: 300;
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+      }
+
+      .swiper-container {
+        width: 100%;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+      }
+
+      .swiper-slide {
+        background-size: cover;
+        background-position: center;
+        & img {
+          width:100%;
         }
-        header {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 2rem;
+      }
+
+      .team {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+        padding: 2rem 1rem;
+      }
+
+      .team-member {
+        flex: 1 1 200px;
+        text-align: center;
+      }
+
+      footer {
+        padding: 2rem 1rem;
+        border-top: 1px solid ;
+        border-color:#2f2f2f;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        position:relative;
+      }
+
+      footer div {
+        flex: 1 1 1 200px;
+        margin-bottom: 1rem;
+      }
+
+      footer h2 {
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+
+      footer ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      footer li {
+        margin-bottom: 0.5rem;
+      }
+
+      footer a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      .hamburger {
+        display: none;
+        cursor: pointer;
+      }
+
+      .dark-mode .top-bar button {
+        background-color: #444;
+      }
+
+      @media (max-width: 767px) {
+        .hamburger {
+          display: block;
         }
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
+
+        .nav-bar {
+          display: none;
         }
-        header p {
-            font-size: 1.2rem;
-            margin-top: 0.5rem;
+
+        .menu-toggle:checked+.nav-bar {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
-        section {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1rem;
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        .header h1 {
+          font-size: 40px;
         }
-        h2 {
-            border-bottom: 2px solid #333;
-            padding-bottom: 0.5rem;
-        }
-        .section-content {
-            margin-top: 1rem;
-        }
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background-color: #333;
-            color: white;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-        a {
-            color: #333;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
+      }
+
+      .toggle-button-cover {
+        display: table-cell;
+        position: relative;
+        box-sizing: border-box;
+        transform:scale(0.45);
+        transform-origin:center right;
+      }
+
+      .button-cover {
+        height: 100px;
+        margin: 20px;
+        background-color: #fff;
+        box-shadow: 0 10px 20px -8px #c5d6d6;
+        border-radius: 4px;
+      }
+
+      .button-cover:before {
+        counter-increment: button-counter;
+        content: counter(button-counter);
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        color: #d7e3e3;
+        font-size: 12px;
+        line-height: 1;
+        padding: 5px;
+      }
+
+      .button-cover,
+      .knobs,
+      .layer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+
+      .button {
+        position: relative;
+        top: 50%;
+        width: 74px;
+        height: 36px;
+        margin: -20px auto 0 auto;
+        overflow: hidden;
+      }
+
+      .button.r,
+      .button.r .layer {
+        border-radius: 100px;
+      }
+
+      .button.b2 {
+        border-radius: 2px;
+      }
+
+      .checkbox {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+        cursor: pointer;
+        z-index: 3;
+      }
+
+      .knobs {
+        z-index: 2;
+      }
+
+      .layer {
+        width: 100%;
+        background-color: #f6f6dc;
+        transition: 0.3s ease all;
+        z-index: 1;
+      }
+      #toggle-button .knobs:before {
+        content: "";
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 20px;
+        height: 10px;
+        color: #fff;
+        font-size: 10px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 1;
+        padding: 9px 4px;
+        background-color: #2f2f2f;
+        border-radius: 50%;
+        transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+      }
+
+      #toggle-button .checkbox:active + .knobs:before {
+        width: 46px;
+        border-radius: 100px;
+      }
+
+      #toggle-button .checkbox:checked:active + .knobs:before {
+        margin-left: -26px;
+      }
+
+      #toggle-button .checkbox:checked + .knobs:before {
+        content: "";
+        left: 42px;
+        background-color: #2f2f2f;
+      }
+
+      #toggle-button .checkbox:checked ~ .layer {
+        background-color: #fcebeb;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
 
-    <header>
-        <h1>Sheryl's Personal Webpage</h1>
-        <p>A collection of my interests, projects, and more</p>
-    </header>
+    <main data-scroll-container class="content" id="top">
 
-    <section id="about">
-        <h2>About Me</h2>
-        <div class="section-content">
-            <p>Hi, I'm Sheryl! Welcome to my personal website where I share a bit about myself, my interests, and my work. I'm constantly exploring new hobbies and projects, so check back often!</p>
+      <div class="top-bar">        
+
+        <div>
+          <a class="go" href="#top">360°</a>
         </div>
-    </section>
 
-    <section id="interests">
-        <h2>Interests & Hobbies</h2>
-        <div class="section-content">
-            <p>I love learning new things, whether it’s coding, reading, or exploring different hobbies. When I'm not working, you can find me diving into creative activities or traveling to new places.</p>
+        <div id="dark-mode-toggle" class="toggle-button-cover">
+          <div class="button r" id="toggle-button">
+            <input type="checkbox" class="checkbox" />
+            <div class="knobs"></div>
+            <div class="layer"></div>
+          </div>
         </div>
-    </section>
 
-    <section id="television">
-        <h2>Television</h2>
-        <div class="section-content">
-            <p>I'm a big fan of watching television series. Some of my favorites include mysteries, sci-fi, and dramas. I'm always on the lookout for the next great show to binge-watch!</p>
+      </div>
+
+      <div class="header" data-scroll-section>
+
+        <header><h1>Web Agency</h1></header>
+
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="hamburger">&#9776;</label>
+
+        <nav class="nav-bar">
+          <ul>
+            <li><a href="#home" data-scroll>Home</a></li>
+            <li><a href="#about" data-scroll>About</a></li>
+            <li><a href="#case-studies" data-scroll>Case Studies</a></li>
+            <li><a href="#portfolio" data-scroll>Portfolio</a></li>
+            <li><a href="#team" data-scroll>Team</a></li>
+            <li><a href="#contact" data-scroll>Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <section id="home" class="main-section" data-scroll-section>
+        <h2 class="title-section" data-scroll data-scroll-speed="1">Welcome to Our Studio</h2>
+        <p class="subtitle-section" data-scroll data-scroll-speed="2">We create ergonomic spaces with individual designs.</p>
+
+        <div class="swiper-container slider-column">
+          <div class="swiper swiper-slider">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <h1 class="slide-title"></h1>
+                <img src="https://via.placeholder.com/780x400/2f2f2f/fbfbf0?text=Slide+1" alt="Swiper">
+              </div>
+              <div class="swiper-slide">
+                <h1 class="slide-title"></h1>
+                <img src="https://via.placeholder.com/780x400/2f2f2f/fbfbf0?text=Slide+2" alt="Swiper">
+              </div>
+              <div class="swiper-slide">
+                <h1 class="slide-title"></h1>
+                <img src="https://via.placeholder.com/780x400/2f2f2f/fbfbf0?text=Slide+3" alt="Swiper">
+              </div>
+              <div class="swiper-slide">
+                <h1 class="slide-title"></h1>
+                <img src="https://via.placeholder.com/780x400/2f2f2f/fbfbf0?text=Slide+4" alt="Swiper">
+              </div>
+              <div class="swiper-slide">
+                <h1 class="slide-title"></h1>
+                <img src="https://via.placeholder.com/780x400/2f2f2f/fbfbf0?text=Slide+5" alt="Swiper">
+              </div>
+            </div>
+          </div>
+          <span class="progressbar"></span>
         </div>
-    </section>
+      </section>
 
-    <section id="music">
-        <h2>Music</h2>
-        <div class="section-content">
-            <p>Music is a big part of my life. Whether it’s discovering new artists or listening to timeless classics, I enjoy a wide range of genres. My playlist is constantly evolving!</p>
+      <section id="about" class="main-section" data-scroll-section>
+        <h2 class="title-section" data-scroll data-scroll-speed="1">About Us</h2>
+        <p class="subtitle-section" data-scroll data-scroll-speed="2">We are a creative agency specializing in modern, responsive design.</p>
+      </section>
+
+      <section id="case-studies" class="main-section" data-scroll-section>
+        <h2 class="title-section" data-scroll data-scroll-speed="1">Case Studies</h2>
+        <p class="subtitle-section" data-scroll data-scroll-speed="2">Explore our latest case studies showcasing our work.</p>
+      </section>
+
+      <section id="portfolio" class="main-section" data-scroll-section>
+        <h2 class="title-section" data-scroll data-scroll-speed="1">Portfolio</h2>
+        <p class="subtitle-section" data-scroll data-scroll-speed="2">Check out our portfolio of recent projects.</p>
+      </section>
+
+      <section id="team" class="main-section" data-scroll-section>
+        <h2 class="title-section" data-scroll data-scroll-speed="1">Our Team</h2>
+        <p class="subtitle-section" data-scroll data-scroll-speed="2" class="team"> old but gold</p>
+
+        <div class="team-member" data-scroll data-scroll-speed="2">
+          <img src="https://via.placeholder.com/150" alt="Team Member">
+          <h3>John Doe</h3>
+          <p>Designer</p>
         </div>
-    </section>
 
-    <section id="recipes">
-        <h2>Recipes</h2>
-        <div class="section-content">
-            <p>Cooking is one of my favorite pastimes. I love experimenting in the kitchen and trying out new recipes, from comfort food to international cuisines.</p>
+        <div class="team-member" data-scroll data-scroll-speed="3">
+          <img src="https://via.placeholder.com/150" alt="Team Member">
+          <h3>Jane Smith</h3>
+          <p>Developer</p>
         </div>
-    </section>
 
-    <section id="skills">
-        <h2>Skills & Projects</h2>
-        <div class="section-content">
-            <p>Here are some of the skills I've developed and projects I've worked on:
-                <ul>
-                    <li>Coding: Python and web development</li>
-                    <li>Project Management: Organizing and leading teams</li>
-                    <li>Creative Writing: Blogging and storytelling</li>
-                </ul>
-                Stay tuned for more updates on my current and future projects!
-            </p>
+      </section>
+
+      <section id="contact" class="main-section" data-scroll-section>
+        <h2 class="title-section"  data-scroll data-scroll-speed="1">Contact Us</h2>
+        <p class="subtitle-section" data-scroll data-scroll-speed="2">Get in touch with us for your next project.</p>
+      </section>
+
+      <footer data-scroll-section>
+        <div>
+          <h2>Company</h2>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+          </ul>
         </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 Sheryl. All rights reserved.</p>
-    </footer>
-
-</body>
+        <div>
+          <h2>Resources</h2>
+          <ul>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Contact Support</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Legal</h2>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Social</h2>
+          <ul>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">Facebook</a></li>
+          </ul>
+        </div>
+      </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+  </body>
 </html>
